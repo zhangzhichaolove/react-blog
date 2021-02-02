@@ -17,11 +17,9 @@ function App() {
         </div>
         <div style={{ display: 'flex', flex: 5, justifyContent: 'center' }}>
           <Switch>
-            <Route path='/' exact render={() => (
-              <Redirect to='/home' />
-            )} />
             <Route exact path='/home' component={Home} />
             <Route exact path='/about' component={About} />
+            <Redirect to='/home' />
           </Switch>
         </div>
       </div>
