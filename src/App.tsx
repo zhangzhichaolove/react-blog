@@ -20,8 +20,8 @@ function App() {
             <Route path='/' exact render={() => (
               <Redirect to='/home' />
             )} />
-            <Route path='/home' component={Home} />
-            <Route path='/about' component={About} />
+            <Route exact path='/home' component={Home} />
+            <Route exact path='/about' component={About} />
           </Switch>
         </div>
       </div>
