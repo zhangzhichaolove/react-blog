@@ -1,7 +1,8 @@
-import { NavLink, Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Header from './page/Header'
 import Home from './page/Home'
 import About from './page/About'
+import LinkNav from './components/LinkNav'
 import './App.css';
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
       <hr />
       <div style={{ flexDirection: 'row', display: 'flex' }}>
         <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-          <NavLink activeClassName='navActive' className='navStyle' to='/home'>首页</NavLink>
-          <NavLink activeClassName='navActive' className='navStyle' to='/about'>关于</NavLink>
+          <LinkNav to='/home'>首页</LinkNav>
+          <LinkNav to='/about'>关于</LinkNav>
         </div>
         <div style={{ display: 'flex', flex: 5, justifyContent: 'center' }}>
           <Switch>
