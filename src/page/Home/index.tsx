@@ -15,12 +15,12 @@ export default class index extends Component {
                     <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                         <LinkNav to='/'>首页</LinkNav>
                         <LinkNav to='/class'>分类</LinkNav>
-                        <LinkNav to='/home/about'>关于</LinkNav>
+                        <LinkNav to='/about'>关于</LinkNav>
                     </div>
                     <div style={{ display: 'flex', flex: 5, justifyContent: 'center' }}>
                         <Switch>
-                            <Route path='/' component={BlogList} />
-                            <Route path='/home/about' component={About} />
+                            <Route exact path='/' component={BlogList} />
+                            <Route path='/about' component={About} />
                         </Switch>
                     </div>
                 </div>
