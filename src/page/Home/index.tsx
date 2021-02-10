@@ -2,15 +2,13 @@ import React, { Component } from 'react'
 import { Switch, Route, NavLink as LinkNav } from 'react-router-dom'
 import About from '../About'
 import BlogList from '../BlogList'
-import Header from '../../page/Header'
-import HHeader from '../../components/Header'
+import Header from '../../components/Header'
 // import LinkNav from '../../components/LinkNav'
 
 export default class index extends Component {
     render() {
         return (
             <>
-                <HHeader />
                 <Header />
                 <hr />
                 <div style={{ flexDirection: 'row', display: 'flex' }}>
