@@ -3,8 +3,7 @@ import Home from './page/Home'
 import Class from './page/Class'
 import NotFound from './page/NotFound'
 // import About from './page/About'
-import './App.css';
-import 'antd/dist/antd.css';
+import './App.less';
 
 function App() {
   return (
