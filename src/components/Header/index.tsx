@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
+import { Row, Col, Menu } from 'antd'
+import { DingtalkOutlined } from '@ant-design/icons';
 import logo from '../../logo.svg'
+import './index.css'
 
 export default class index extends Component {
     render() {
         return (
             <div>
-                <img src={logo} alt="图标" style={{width:'50px',height:'50px'}} />
-                <h2>博客中心</h2>
-                <h5>逆水行舟、不进则退。</h5>
+                <Row align='top' justify='center'>
+                    <DingtalkOutlined style={{ fontSize: 30 }} />
+                    <h2>博客中心</h2>
+                </Row>
+                <h5 className="headerDescribe">逆水行舟、不进则退。</h5>
             </div>
         )
     }
