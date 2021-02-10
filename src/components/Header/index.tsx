@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Row, Col, Menu } from 'antd'
+import { Row, } from 'antd'
 import { DingtalkOutlined } from '@ant-design/icons';
-import logo from '../../logo.svg'
 import './index.css'
 
 export default class index extends Component {
