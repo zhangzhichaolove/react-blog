@@ -3,6 +3,7 @@ import { Switch, Route, NavLink as LinkNav } from 'react-router-dom'
 import About from '../About'
 import BlogList from '../BlogList'
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 import Author from '../../components/Author'
 import Label from '../../components/Label'
 import Contact from '../../components/Contact'
@@ -50,6 +51,7 @@ export default class index extends Component {
                         <Contact />
                     </Col>
                 </Row>
+                <Footer />
             </>
         )
     }
