@@ -25,7 +25,7 @@ export default class index extends Component {
                 <List itemLayout='vertical' dataSource={this.state.blogs}
                     renderItem={(item) => {
                         return <List.Item>
-                            <div>{item.title}</div>
+                            <div className='blogTitleStyle'>{item.title}</div>
                             <Row className='statisticsStyle'>
                                 <span><SendOutlined />2021-02-11</span>
                                 <span><ProjectOutlined />go</span>

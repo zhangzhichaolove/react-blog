@@ -1,3 +1,9 @@
+.blogTitleStyle{
+    font-size: 1.2rem;
+    color: #1E90FF;
+    padding: 0 .5rem;
+}
+
 .statisticsStyle{
     margin-right: .5rem;
     color: #AAA;
