@@ -3,6 +3,7 @@ import { Switch, Route, NavLink as LinkNav } from 'react-router-dom'
 import About from '../About'
 import BlogList from '../BlogList'
 import Header from '../../components/Header'
+import Author from '../../components/Author'
 import { Row, Col, Menu } from 'antd'
 import { CrownTwoTone, WalletTwoTone, IdcardTwoTone } from '@ant-design/icons';
 import './index.css'
@@ -35,11 +36,14 @@ export default class index extends Component {
                             </Item>
                         </Menu>
                     </Col>
-                    <Col span={20}>
+                    <Col span={15}>
                         <Switch>
                             <Route exact path='/' component={BlogList} />
                             <Route path='/home/about' component={About} />
                         </Switch>
+                    </Col>
+                    <Col span={5}>
+                        <Author />
                     </Col>
                 </Row>
             </>
