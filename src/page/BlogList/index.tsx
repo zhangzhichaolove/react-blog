@@ -27,9 +27,9 @@ export default class index extends Component {
                         return <List.Item>
                             <div>{item.title}</div>
                             <Row>
-                                <span className='statisticsStyle'><SendOutlined />2021-02-11</span>
-                                <span className='statisticsStyle'><ProjectOutlined />go</span>
-                                <span className='statisticsStyle'><FireOutlined />1888</span>
+                                <span className='statisticsStyle'><SendOutlined /> 2021-02-11</span>
+                                <span className='statisticsStyle'><ProjectOutlined /> go</span>
+                                <span className='statisticsStyle'><FireOutlined /> 1888</span>
                             </Row>
                             <div>{item.abstract}{item.abstract}{item.abstract}{item.abstract}{item.abstract}</div>
                         </List.Item>
