@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { List } from 'antd'
+import { Link as LinkNav } from 'react-router-dom'
 import Statistics from '../../components/Statistics'
 import './index.css'
 
@@ -25,7 +26,11 @@ export default class index extends Component {
                 <List itemLayout='vertical' dataSource={this.state.blogs}
                     renderItem={(item) => {
                         return <List.Item>
-                            <div className='blogTitleStyle'>{item.title}</div>
+                            <div className='blogTitleStyle'>
+                                <LinkNav to='/blog'>
+                                    {item.title}
+                                </LinkNav>
+                            </div>
                             <Statistics />
                             <div>{item.abstract}{item.abstract}{item.abstract}{item.abstract}{item.abstract}</div>
                         </List.Item>
