@@ -32,38 +32,55 @@ export default class index extends Component {
                 return hljs.highlightAuto(code).value
             }
         })
-        let markdwonText = `## Block Elements
+        let markdwonText = `
 
-        ## Paragraph and line breaks
-        In Typora, input ‘#’s followed by title content, and press  key will create a header.
+### API介绍
 
-## Blockquotes
+#### [官网](https://api.apiopen.top)
 
-Markdown uses email-style > characters for block quoting. They are presented as:
-## Math Blocks
+\`\`\`
+https://api.apiopen.top
+\`\`\`
 
-You can render *LaTeX* mathematical expressions using **MathJax**.
+### 例子
 
-To add a mathematical expression, input  and press the 'Return' key. This will trigger an input field which accepts *Tex/LaTex* source. For example:
-## 博客中间
+\`\`\`
+# 一句名言
+http://poetry.apiopen.top
+\`\`\`
 
-$$
-athbf{V}_1 times mathbf{V}_2 =  begin{vmatrix}
-athbf{i} & athbf{j} & mathbf{k} 
-rac{artial X}{artial u} &  frac{partial Y}{partial u} & 0 
-rac{artial X}{artial v} &  frac{partial Y}{partial v} & 0 
-nd{vmatrix}
-$$
+\`\`\`
+# 接口地址
+http://poetry.apiopen.top/sentences
+\`\`\`
 
-## 博客结尾
-In the markdown source file, the math block is a *LaTeX* expression wrapped by a pair of ‘$$’ marks:
-        \`\`\`go\`\`\``
+### 响应
+
+\`\`\`
+{
+
+    "code": 200,
+
+    "message": "成功!",
+
+    "result": {
+
+        "name": "花不语，水空流。年年拚得为花愁。",
+
+        "from": "晏几道《鹧鸪天·守得莲开结伴游》"
+
+    }
+}
+
+\`\`\`
+        `
         const html = marked(markdwonText)
         return (
             <>
                 <Row justify='center'>
-                    <Col span={19}>
-                        <h2>博客标题</h2>
+                    <Col span={4} />
+                    <Col span={15}>
+                        <h2>免费开放API接口</h2>
                         <Statistics isCenter={true} />
                         <div className='blogStyle'
                             dangerouslySetInnerHTML={{ __html: html }}>
