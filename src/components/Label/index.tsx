@@ -6,7 +6,7 @@ export default function index() {
     return (
         <div>
             <Divider>标签云</Divider>
-            <div>
+            <div className='tagContainer'>
                 <Tag color="magenta" className='tagStyle'>android</Tag>
                 <Tag color="magenta" className='tagStyle'>java</Tag>
                 <Tag color="magenta" className='tagStyle'>go</Tag>
