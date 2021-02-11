@@ -29,7 +29,7 @@ export default class index extends Component {
                                 </LinkNav>
                             </Item>
                             <Item className="itemStyle">
-                                <LinkNav to='/about'>
+                                <LinkNav to='/home/about'>
                                     <IdcardTwoTone />关于
                                 </LinkNav>
                             </Item>
@@ -38,7 +38,7 @@ export default class index extends Component {
                     <Col span={20}>
                         <Switch>
                             <Route exact path='/' component={BlogList} />
-                            <Route path='/about' component={About} />
+                            <Route path='/home/about' component={About} />
                         </Switch>
                     </Col>
                 </Row>
