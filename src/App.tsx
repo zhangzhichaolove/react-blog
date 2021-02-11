@@ -1,5 +1,6 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from './page/Home'
+import BlogDetails from './page/BlogDetails'
 import Class from './page/Class'
 import NotFound from './page/NotFound'
 // import About from './page/About'
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path='/class' component={Class} />
+        <Route path='/blog' component={BlogDetails} />
         <Route exact path='/' component={Home} />
         <Route path='/home' component={Home} />
         {/* <Route path='/home/about' component={About} /> */}

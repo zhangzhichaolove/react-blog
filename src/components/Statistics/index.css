@@ -1,0 +1,20 @@
+.statisticsStyle {
+    margin-right: .5rem;
+    color: #AAA;
+}
+
+.statisticsCenterStyle {
+    margin-right: .5rem;
+    color: #AAA;
+    justify-content: center;
+}
+
+.statisticsStyle span {
+    display: inline-block;
+    padding: 0 .2rem;
+}
+
+.statisticsCenterStyle span {
+    display: inline-block;
+    padding: 0 .2rem;
+}

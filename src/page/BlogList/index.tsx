@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { List, Row } from 'antd'
-import { SendOutlined, ProjectOutlined, FireOutlined } from '@ant-design/icons';
+import { List } from 'antd'
+import Statistics from '../../components/Statistics'
 import './index.css'
 
 export default class index extends Component {
@@ -26,11 +26,7 @@ export default class index extends Component {
                     renderItem={(item) => {
                         return <List.Item>
                             <div className='blogTitleStyle'>{item.title}</div>
-                            <Row className='statisticsStyle'>
-                                <span><SendOutlined />2021-02-11</span>
-                                <span><ProjectOutlined />go</span>
-                                <span><FireOutlined />1888</span>
-                            </Row>
+                            <Statistics />
                             <div>{item.abstract}{item.abstract}{item.abstract}{item.abstract}{item.abstract}</div>
                         </List.Item>
                     }}

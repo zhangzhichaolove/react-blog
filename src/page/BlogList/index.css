@@ -3,13 +3,3 @@
     color: #1E90FF;
     padding: 0 .5rem;
 }
-
-.statisticsStyle{
-    margin-right: .5rem;
-    color: #AAA;
-}
-
-.statisticsStyle span{
-    display: inline-block;
-    padding: 0 .2rem;
-}
