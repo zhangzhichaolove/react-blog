@@ -4,6 +4,8 @@ import About from '../About'
 import BlogList from '../BlogList'
 import Header from '../../components/Header'
 import Author from '../../components/Author'
+import Label from '../../components/Label'
+import Contact from '../../components/Contact'
 import { Row, Col, Menu } from 'antd'
 import { CrownTwoTone, WalletTwoTone, IdcardTwoTone } from '@ant-design/icons';
 import './index.css'
@@ -44,6 +46,8 @@ export default class index extends Component {
                     </Col>
                     <Col span={5}>
                         <Author />
+                        <Label />
+                        <Contact />
                     </Col>
                 </Row>
             </>
