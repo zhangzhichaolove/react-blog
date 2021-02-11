@@ -6,7 +6,7 @@ export default class index extends Component {
         return (
             <div>
                 <Divider>文章目录</Divider>
-                <div>11111</div>
+                <div>{this.props.children}</div>
             </div>
         )
     }
