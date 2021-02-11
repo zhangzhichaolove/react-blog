@@ -1,4 +1,9 @@
 .statisticsStyle{
     margin-right: .5rem;
-    color: inherit;
+    color: #AAA;
+}
+
+.statisticsStyle span{
+    display: inline-block;
+    padding: 0 .2rem;
 }
