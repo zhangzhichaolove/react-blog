@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Row } from 'antd'
+import { Row } from 'antd'
 import { SendOutlined, ProjectOutlined, FireOutlined } from '@ant-design/icons';
 import './index.css'
 
