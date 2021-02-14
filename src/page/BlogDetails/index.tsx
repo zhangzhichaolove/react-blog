@@ -6,6 +6,7 @@ import { Row, Col, Affix } from 'antd'
 import Statistics from '../../components/Statistics'
 import BlogNav from '../../components/BlogNav'
 import Tocify from '../../components/Tocify'
+import MenuNav from '../../components/MenuNav'
 import marked from 'marked'
 import hljs from 'highlight.js'
 
@@ -78,7 +79,9 @@ http://poetry.apiopen.top/sentences
         return (
             <>
                 <Row justify='center'>
-                    <Col span={4} />
+                    <Col span={4} >
+                        <MenuNav />
+                    </Col>
                     <Col span={15}>
                         <h2>免费开放API接口</h2>
                         <Statistics isCenter={true} />

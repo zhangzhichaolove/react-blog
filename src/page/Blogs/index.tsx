@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Row, Col, Affix, List } from 'antd'
+import { Link as LinkNav } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Label from '../../components/Label'
 import Contact from '../../components/Contact'
-import { Row, Col, Affix } from 'antd'
 import Statistics from '../../components/Statistics'
-import { List } from 'antd'
-import { Link as LinkNav } from 'react-router-dom'
+import MenuNav from '../../components/MenuNav'
+
 
 import 'highlight.js/styles/monokai-sublime.css'
 import './index.css'
@@ -34,7 +35,9 @@ export default class index extends Component<Props>{
         return (
             <>
                 <Row justify='center'>
-                    <Col span={4} />
+                    <Col span={4} >
+                        <MenuNav />
+                    </Col>
                     <Col span={15}>
                         <h2>包含'{this.props.location.state.tag}'相关文章</h2>
                         <List itemLayout='vertical' dataSource={this.state.blogs}

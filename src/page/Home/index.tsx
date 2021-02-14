@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Switch, Route, NavLink as LinkNav } from 'react-router-dom'
+import { Row, Col } from 'antd'
+import { Switch, Route } from 'react-router-dom'
 import About from '../About'
 import BlogList from '../BlogList'
 import Header from '../../components/Header'
@@ -7,12 +8,9 @@ import Footer from '../../components/Footer'
 import Author from '../../components/Author'
 import Label from '../../components/Label'
 import Contact from '../../components/Contact'
-import { Row, Col, Menu } from 'antd'
-import { CrownTwoTone, WalletTwoTone, IdcardTwoTone } from '@ant-design/icons';
+import MenuNav from '../../components/MenuNav'
 import './index.css'
 // import LinkNav from '../../components/LinkNav'
-
-const { Item } = Menu;
 
 export default class index extends Component {
     render() {
@@ -21,23 +19,7 @@ export default class index extends Component {
                 <Header />
                 <Row justify='center'>
                     <Col span={4}>
-                        <Menu>
-                            <Item className="itemStyle">
-                                <LinkNav to='/'>
-                                    <CrownTwoTone />首页
-                                </LinkNav>
-                            </Item>
-                            <Item className="itemStyle">
-                                <LinkNav to='/class'>
-                                    <WalletTwoTone />分类
-                                </LinkNav>
-                            </Item>
-                            <Item className="itemStyle">
-                                <LinkNav to='/home/about'>
-                                    <IdcardTwoTone />关于
-                                </LinkNav>
-                            </Item>
-                        </Menu>
+                        <MenuNav />
                     </Col>
                     <Col span={15}>
                         <Switch>
