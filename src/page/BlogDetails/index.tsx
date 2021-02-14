@@ -62,7 +62,7 @@ export default class index extends Component<Iprops, IState> {
                     <Col span={4} >
                         <MenuNav />
                     </Col>
-                    <Col span={15}>
+                    <Col span={15} style={{ overflow: 'hidden' }}>
                         <h2>免费开放API接口</h2>
                         <Statistics isCenter={true} />
                         <div className='blogStyle'
