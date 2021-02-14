@@ -15,7 +15,7 @@ import './index.css'
 import axios from 'axios'
 
 interface IState {
-    markdwonText: string
+    data: any
 }
 
 interface Iprops {
@@ -24,15 +24,18 @@ interface Iprops {
 
 export default class index extends Component<Iprops, IState> {
 
-    state = {
-        markdwonText: ''
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            data: {}
+        }
     }
 
     componentDidMount() {
         const id = this.props.location.state.id
         axios('http://blog.chaochao.cool:8066/api/posts/get?id=' + id).then((res) => {
-            const content = res.data.result.content
-            this.setState({ markdwonText: content })
+            const content = res.data.result
+            this.setState({ data: content })
         })
     }
 
@@ -54,8 +57,8 @@ export default class index extends Component<Iprops, IState> {
                 return hljs.highlightAuto(code).value
             }
         })
-        let content = this.state.markdwonText
-        const html = marked(content)
+        let { title, content } = this.state.data
+        const html = marked(content || '')
         return (
             <>
                 <Row justify='center'>
@@ -63,7 +66,7 @@ export default class index extends Component<Iprops, IState> {
                         <MenuNav />
                     </Col>
                     <Col span={15} style={{ overflow: 'hidden' }}>
-                        <h2>免费开放API接口</h2>
+                        <h2>{title}</h2>
                         <Statistics isCenter={true} />
                         <div className='blogStyle'
                             dangerouslySetInnerHTML={{ __html: html }}>
