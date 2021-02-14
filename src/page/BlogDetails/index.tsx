@@ -12,9 +12,30 @@ import hljs from 'highlight.js'
 
 import 'highlight.js/styles/monokai-sublime.css'
 import './index.css'
+import axios from 'axios'
 
+interface IState {
+    markdwonText: string
+}
 
-export default class index extends Component {
+interface Iprops {
+    location: any
+}
+
+export default class index extends Component<Iprops, IState> {
+
+    state = {
+        markdwonText: ''
+    }
+
+    componentDidMount() {
+        const id = this.props.location.state.id
+        axios('http://blog.chaochao.cool:8066/api/posts/get?id=' + id).then((res) => {
+            const content = res.data.result.content
+            this.setState({ markdwonText: content })
+        })
+    }
+
     render() {
         const tocify = new Tocify()
         const render = new marked.Renderer()
@@ -33,49 +54,8 @@ export default class index extends Component {
                 return hljs.highlightAuto(code).value
             }
         })
-        let markdwonText = `
-
-### API介绍
-
-#### [官网](https://api.apiopen.top)
-
-\`\`\`
-https://api.apiopen.top
-\`\`\`
-
-### 例子
-
-\`\`\`
-# 一句名言
-http://poetry.apiopen.top
-\`\`\`
-
-\`\`\`
-# 接口地址
-http://poetry.apiopen.top/sentences
-\`\`\`
-
-### 响应
-
-\`\`\`
-{
-
-    "code": 200,
-
-    "message": "成功!",
-
-    "result": {
-
-        "name": "花不语，水空流。年年拚得为花愁。",
-
-        "from": "晏几道《鹧鸪天·守得莲开结伴游》"
-
-    }
-}
-
-\`\`\`
-        `
-        const html = marked(markdwonText)
+        let content = this.state.markdwonText
+        const html = marked(content)
         return (
             <>
                 <Row justify='center'>
@@ -88,38 +68,6 @@ http://poetry.apiopen.top/sentences
                         <div className='blogStyle'
                             dangerouslySetInnerHTML={{ __html: html }}>
                         </div>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
                     </Col>
                     <Col span={5}>
                         <Affix offsetTop={5}>
