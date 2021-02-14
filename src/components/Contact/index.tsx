@@ -9,7 +9,7 @@ export default function index() {
             <Divider>联系方式</Divider>
             <div><EnvironmentOutlined className='iconStyle' />四川省 成都市</div>
             <div><WhatsAppOutlined className='iconStyle' />13594347817</div>
-            <div><MailOutlined className='iconStyle' />admin@peakchao.com</div>
+            <a href="mailto:admin@peakchao.com"><MailOutlined className='iconStyle' />admin@peakchao.com</a>
         </div>
     )
 }
