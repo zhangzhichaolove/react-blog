@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { List, Card, BackTop } from 'antd'
-import { UpCircleTwoTone, setTwoToneColor } from '@ant-design/icons';
+import { List, Card } from 'antd'
 import { Link as LinkNav } from 'react-router-dom'
 import axios from 'axios'
 import Statistics from '../../components/Statistics'
+import BackTop from '../../components/BackTop'
 import './index.css'
 
 interface IState {
@@ -27,7 +27,6 @@ export default class index extends Component<Iprops, IState> {
     }
 
     componentDidMount() {
-        setTwoToneColor('#d4237a')
         this.refreshData()
     }
 
@@ -68,9 +67,7 @@ export default class index extends Component<Iprops, IState> {
                         </List.Item>
                     }}
                 />
-                <BackTop>
-                    <UpCircleTwoTone style={{ fontSize: 40 }} />
-                </BackTop>
+                <BackTop />
             </div>
         )
     }

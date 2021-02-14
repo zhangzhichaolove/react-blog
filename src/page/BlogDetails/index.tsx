@@ -7,6 +7,7 @@ import Statistics from '../../components/Statistics'
 import BlogNav from '../../components/BlogNav'
 import Tocify from '../../components/Tocify'
 import MenuNav from '../../components/MenuNav'
+import BackTop from '../../components/BackTop'
 import marked from 'marked'
 import hljs from 'highlight.js'
 
@@ -80,6 +81,7 @@ export default class index extends Component<Iprops, IState> {
                         </Affix>
                     </Col>
                 </Row>
+                <BackTop />
                 <Footer />
             </>
         )
