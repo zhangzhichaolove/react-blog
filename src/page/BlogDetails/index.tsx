@@ -59,7 +59,7 @@ export default class index extends Component<Iprops, IState> {
             breaks: true,
             smartLists: true,
             highlight: (code) => {
-                return hljs.highlightAuto(code).value
+                return hljs.highlightAuto(code, hljs.listLanguages()).value
             }
         })
         let { title, content } = this.state.data
