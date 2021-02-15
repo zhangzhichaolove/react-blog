@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Card } from 'antd'
+import { List, Card, Skeleton } from 'antd'
 import { Link as LinkNav } from 'react-router-dom'
 import axios from 'axios'
 import Statistics from '../../components/Statistics'
@@ -8,6 +8,7 @@ import './index.css'
 
 interface IState {
     result: any
+    isLoading: boolean
 }
 
 interface Iprops {
@@ -22,7 +23,8 @@ export default class index extends Component<Iprops, IState> {
     constructor(props: any) {
         super(props)
         this.state = {
-            result: {}
+            result: {},
+            isLoading: true
         }
     }
 
@@ -33,9 +35,7 @@ export default class index extends Component<Iprops, IState> {
     refreshData = () => {
         axios(`http://blog.chaochao.cool:8066/api/posts/list?pageNumber=${this.pageNumber}&pageSize=${this.pageSize}&wordsCount=460`).then((res) => {
             const result = res.data.result
-            this.setState({ result: result })
-            console.log(result);
-
+            this.setState({ result: result, isLoading: false })
         })
     }
 
@@ -46,6 +46,7 @@ export default class index extends Component<Iprops, IState> {
     }
 
     render() {
+        const { isLoading } = this.state
         let { list, pageNumber, pageSize, total } = this.state.result
         let blogs: any[] = list || []
         return (
@@ -53,19 +54,20 @@ export default class index extends Component<Iprops, IState> {
                 <List itemLayout='vertical'
                     dataSource={blogs}
                     split={false}
+                    loading={false}
                     pagination={{ position: 'bottom', current: pageNumber || this.pageNumber, defaultCurrent: 1, pageSize: pageSize || this.pageSize, total: total, hideOnSinglePage: true, onChange: this.onPageChange }}
-                    renderItem={(item) => {
-                        return <List.Item>
-                            <div className='blogTitleStyle'>
-                                <LinkNav to={{ pathname: '/blog', state: { id: item.id } }}>
-                                    <Card title={item.title}>
-                                        <Statistics />
-                                        <div>{item.content}</div>
-                                    </Card>
-                                </LinkNav>
-                            </div>
-                        </List.Item>
-                    }}
+                    renderItem={item => (
+                        <List.Item>
+                            {isLoading ? <Skeleton loading={isLoading} active /> :
+                                <div className='blogTitleStyle'>
+                                    <LinkNav to={{ pathname: '/blog', state: { id: item.id } }}>
+                                        <Card title={item.title}>
+                                            <Statistics />
+                                            <div>{item.content}</div>
+                                        </Card>
+                                    </LinkNav>
+                                </div>}
+                        </List.Item>)}
                 />
                 <BackTop />
             </div>
