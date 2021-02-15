@@ -5,6 +5,15 @@
 
 }
 
+.custom-html-style * {
+    margin: .3rem 0rem !important;
+}
+
+.custom-html-style p {
+    display: flex;
+    align-items: baseline;
+}
+
 .detailed-title {
     font-size: 1.6rem;
     text-align: center;
@@ -16,7 +25,7 @@
 }
 
 .blogStyle {
-    padding: 2.5rem;
+    padding: 0rem;
     font-size: 1.05rem;
     color: #777;
     line-height: 1.9rem;

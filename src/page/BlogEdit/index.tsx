@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Tag, Input } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css';
 import marked from 'marked'
@@ -7,8 +9,27 @@ import axios from 'axios';
 
 import './index.css'
 
-export default class index extends Component {
+interface IState {
+    tags: Array<string>,
+    inputVisible: boolean,
+    inputValue: string,
+}
 
+interface Iprops {
+}
+
+export default class index extends Component<Iprops, IState> {
+
+    inputRef: any
+
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+            inputVisible: false,
+            inputValue: '',
+        }
+    }
 
     componentDidMount() {
         console.log('支持高亮语言-->', hljs.listLanguages());
@@ -31,6 +52,34 @@ export default class index extends Component {
         });
     }
 
+    showInput = () => {
+        this.setState({ inputVisible: true }, () => this.inputRef.focus());
+    }
+
+    handleInputChange = (e: any) => {
+        this.setState({ inputValue: e.target.value });
+    }
+
+    handleInputConfirm = () => {
+        const { inputValue } = this.state;
+        let { tags } = this.state;
+        if (inputValue && tags.indexOf(inputValue) === -1) {
+            tags = [...tags, inputValue];
+        }
+        console.log(tags);
+        this.setState({
+            tags,
+            inputVisible: false,
+            inputValue: '',
+        });
+    }
+
+    mapTag(item: string) {
+        return (
+            <Tag color="magenta" >{item}</Tag>
+        )
+    }
+
     render() {
         const render = new marked.Renderer()
         marked.setOptions({
@@ -44,11 +93,28 @@ export default class index extends Component {
                 return hljs.highlightAuto(code, hljs.listLanguages()).value
             }
         })
+        const { tags, inputVisible, inputValue } = this.state;
+        const tagChild = tags.map(this.mapTag);
         return (
             <div>
                 <h2>文章编辑</h2>
+                {tagChild}
+                {inputVisible ? <Input
+                    ref={ref => this.inputRef = ref}
+                    type="text"
+                    size="small"
+                    style={{ width: 78 }}
+                    value={inputValue}
+                    onChange={this.handleInputChange}
+                    onBlur={this.handleInputConfirm}
+                    onPressEnter={this.handleInputConfirm}
+                /> :
+                    <Tag onClick={this.showInput} className="site-tag-plus">
+                        <PlusOutlined /> 新标签
+                </Tag>}
+
                 <MdEditor
-                    style={{ height: "600px" }}
+                    style={{ height: "600px", marginTop: '20px' }}
                     config={{ imageAccept: '.jpg,.jpeg,.gif,.png' }}
                     onImageUpload={this.onImageUpload}
                     renderHTML={(text) => <div className='blogStyle' dangerouslySetInnerHTML={{ __html: marked(text || '') }}></div>}
