@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
-import { Tag, Input } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Tag, Button } from 'antd';
 import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css';
 import marked from 'marked'
 import hljs from 'highlight.js'
 import axios from 'axios';
+import LabelModal from '../../components/LabelModal'
 
 import './index.css'
 
 interface IState {
-    tags: Array<string>,
-    inputVisible: boolean,
-    inputValue: string,
+    tags: Array<string>
+    isLabelModalVisible: boolean
 }
 
 interface Iprops {
@@ -20,14 +19,12 @@ interface Iprops {
 
 export default class index extends Component<Iprops, IState> {
 
-    inputRef: any
 
     constructor(props: any) {
         super(props)
         this.state = {
             tags: ['Tag 1', 'Tag 2', 'Tag 3'],
-            inputVisible: false,
-            inputValue: '',
+            isLabelModalVisible: false
         }
     }
 
@@ -52,25 +49,9 @@ export default class index extends Component<Iprops, IState> {
         });
     }
 
-    showInput = () => {
-        this.setState({ inputVisible: true }, () => this.inputRef.focus());
-    }
-
-    handleInputChange = (e: any) => {
-        this.setState({ inputValue: e.target.value });
-    }
-
-    handleInputConfirm = () => {
-        const { inputValue } = this.state;
-        let { tags } = this.state;
-        if (inputValue && tags.indexOf(inputValue) === -1) {
-            tags = [...tags, inputValue];
-        }
-        console.log(tags);
+    addLabel = () => {
         this.setState({
-            tags,
-            inputVisible: false,
-            inputValue: '',
+            isLabelModalVisible: true
         });
     }
 
@@ -93,26 +74,13 @@ export default class index extends Component<Iprops, IState> {
                 return hljs.highlightAuto(code, hljs.listLanguages()).value
             }
         })
-        const { tags, inputVisible, inputValue } = this.state;
+        const { tags } = this.state;
         const tagChild = tags.map(this.mapTag);
         return (
             <div>
                 <h2>文章编辑</h2>
                 {tagChild}
-                {inputVisible ? <Input
-                    ref={ref => this.inputRef = ref}
-                    type="text"
-                    size="small"
-                    style={{ width: 78 }}
-                    value={inputValue}
-                    onChange={this.handleInputChange}
-                    onBlur={this.handleInputConfirm}
-                    onPressEnter={this.handleInputConfirm}
-                /> :
-                    <Tag onClick={this.showInput} className="site-tag-plus">
-                        <PlusOutlined /> 新标签
-                </Tag>}
-
+                <Button type='primary' onClick={this.addLabel}>添加标签</Button>
                 <MdEditor
                     style={{ height: "600px", marginTop: '20px' }}
                     config={{ imageAccept: '.jpg,.jpeg,.gif,.png' }}
@@ -120,6 +88,12 @@ export default class index extends Component<Iprops, IState> {
                     renderHTML={(text) => <div className='blogStyle' dangerouslySetInnerHTML={{ __html: marked(text || '') }}></div>}
                     onChange={this.handleEditorChange}
                 />
+                <LabelModal isModalVisible={this.state.isLabelModalVisible} handleOk={(selectTags: Array<string>) => {
+                    console.log('选择了标签-->', selectTags);
+                    this.setState({
+                        tags: selectTags
+                    });
+                }} />
             </div>
         )
     }
