@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Footer from '../../components/Footer'
 import Label from '../../components/Label'
 import Contact from '../../components/Contact'
-import { Row, Col, Affix } from 'antd'
+import { Row, Col, Affix, Spin } from 'antd'
 import Statistics from '../../components/Statistics'
 import BlogNav from '../../components/BlogNav'
 import Tocify from '../../components/Tocify'
@@ -17,6 +17,7 @@ import axios from 'axios'
 
 interface IState {
     data: any
+    loading: boolean
 }
 
 interface Iprops {
@@ -28,7 +29,8 @@ export default class index extends Component<Iprops, IState> {
     constructor(props: any) {
         super(props)
         this.state = {
-            data: {}
+            data: {},
+            loading: true
         }
     }
 
@@ -36,7 +38,7 @@ export default class index extends Component<Iprops, IState> {
         const id = this.props.location.state.id
         axios('http://blog.chaochao.cool:8066/api/posts/get?id=' + id).then((res) => {
             const content = res.data.result
-            this.setState({ data: content })
+            this.setState({ data: content, loading: false })
         })
     }
 
@@ -62,27 +64,29 @@ export default class index extends Component<Iprops, IState> {
         const html = marked(content || '')
         return (
             <>
-                <Row justify='center'>
-                    <Col span={4} >
-                        <MenuNav />
-                    </Col>
-                    <Col span={15} style={{ overflow: 'hidden' }}>
-                        <h2>{title}</h2>
-                        <Statistics isCenter={true} />
-                        <div className='blogStyle'
-                            dangerouslySetInnerHTML={{ __html: html }}>
-                        </div>
-                    </Col>
-                    <Col span={5}>
-                        <Affix offsetTop={5}>
-                            <BlogNav >{tocify && tocify.render()}</BlogNav>
-                            <Label />
-                            <Contact />
-                        </Affix>
-                    </Col>
-                </Row>
-                <BackTop />
-                <Footer />
+                <Spin tip="Loading..." spinning={this.state.loading}>
+                    <Row justify='center'>
+                        <Col span={4} >
+                            <MenuNav />
+                        </Col>
+                        <Col span={15} style={{ overflow: 'hidden' }}>
+                            <h2>{title}</h2>
+                            <Statistics isCenter={true} />
+                            <div className='blogStyle'
+                                dangerouslySetInnerHTML={{ __html: html }}>
+                            </div>
+                        </Col>
+                        <Col span={5}>
+                            <Affix offsetTop={5}>
+                                <BlogNav >{tocify && tocify.render()}</BlogNav>
+                                <Label />
+                                <Contact />
+                            </Affix>
+                        </Col>
+                    </Row>
+                    <BackTop />
+                    <Footer />
+                </Spin>
             </>
         )
     }
