@@ -46,7 +46,9 @@ export default class index extends Component<Iprops, IState> {
         const tocify = new Tocify()
         const render = new marked.Renderer()
         render.heading = (text, level, raw) => {
-            const anchor = tocify.add(text, level);
+            var reg = /<[^<>]+>/g;
+            const tocifyText = text.replace(reg, '');
+            const anchor = tocify.add(tocifyText, level);
             return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
         }
         marked.setOptions({
