@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tag, Button } from 'antd';
+import { Tag, Button, Input, message as Message } from 'antd';
 import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css';
 import marked from 'marked'
@@ -12,19 +12,24 @@ import './index.css'
 interface IState {
     tags: Array<any>
     isLabelModalVisible: boolean
+    title: string
 }
 
 interface Iprops {
 }
 
+const { TextArea } = Input;
+
 export default class index extends Component<Iprops, IState> {
 
+    content = ''
 
     constructor(props: any) {
         super(props)
         this.state = {
             tags: [],
-            isLabelModalVisible: false
+            isLabelModalVisible: false,
+            title: ''
         }
     }
 
@@ -32,8 +37,9 @@ export default class index extends Component<Iprops, IState> {
         console.log('支持高亮语言-->', hljs.listLanguages());
     }
 
-    handleEditorChange(data: { text: string, html: string }) {
+    handleEditorChange = (data: { text: string, html: string }) => {
         console.log('文本更新-->\n', data.text)
+        this.content = data.text
     }
 
     onImageUpload(file: any) {
@@ -55,9 +61,34 @@ export default class index extends Component<Iprops, IState> {
         });
     }
 
+    titleOnChange = ({ target: { value } }: any) => {
+        console.log(value);
+        this.setState({ title: value })
+    }
+
+    submitBlog = () => {
+        const { tags, title } = this.state
+        const tagIds: Array<any> = []
+        tags.forEach(tag => tagIds.push(tag.id))
+        let param = {
+            title: title,
+            brief: "这是简介。",
+            content: this.content,
+            tagIds: tagIds.join(',')
+        }
+        axios.post('/api/addBlog', param).then((res) => {
+            const { code, message } = res.data
+            if (code === 200) {
+                Message.success('发布成功!');
+            } else {
+                Message.error(message);
+            }
+        })
+    }
+
     mapTag(item: any) {
         return (
-            <Tag color="magenta" >{item.name}</Tag>
+            <Tag color="magenta" key={item.id}>{item.name}</Tag>
         )
     }
 
@@ -79,6 +110,7 @@ export default class index extends Component<Iprops, IState> {
         return (
             <div>
                 <h2>文章编辑</h2>
+                <Input allowClear placeholder='请输入文章标题' value={this.state.title} onChange={this.titleOnChange} />
                 {tagChild}
                 <Button type='primary' onClick={this.addLabel}>添加标签</Button>
                 <MdEditor
@@ -94,6 +126,13 @@ export default class index extends Component<Iprops, IState> {
                         tags: selectTags
                     });
                 }} />
+                <TextArea
+                    // value={value}
+                    // onChange={this.onChange}
+                    placeholder="请输入文章简介"
+                    autoSize={{ minRows: 3, maxRows: 50 }}
+                />
+                <Button type='primary' onClick={this.submitBlog}>发布文章</Button>
             </div>
         )
     }

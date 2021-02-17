@@ -36,7 +36,7 @@ export default class index extends Component<Iprops, IState> {
 
     componentDidMount() {
         const id = this.props.location.state.id
-        axios('http://blog.chaochao.cool:8066/api/posts/get?id=' + id).then((res) => {
+        axios('/api/blogDetails?id=' + id).then((res) => {
             const content = res.data.result
             this.setState({ data: content, loading: false })
         })

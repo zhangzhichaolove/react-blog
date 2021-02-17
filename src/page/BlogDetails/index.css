@@ -21,10 +21,12 @@
     color: #777;
     line-height: 1.9rem;
     text-align: left;
+    margin-left: 5rem;
+    margin-right: 5rem;
 }
 
 .blogStyle h2 {
-    border-bottom: 1px solid #d9dada;
+    /* border-bottom: 1px solid #d9dada; */
     padding-bottom: 1rem;
     margin-bottom: 2rem;
     margin-top: 2rem;
