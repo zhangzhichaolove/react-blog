@@ -77,11 +77,9 @@ export default class index extends Component<Iprops, IState> {
             tagIds: tagIds.join(',')
         }
         axios.post('/api/addBlog', param).then((res) => {
-            const { code, message } = res.data
+            const { code } = res.data
             if (code === 200) {
                 Message.success('发布成功!');
-            } else {
-                Message.error(message);
             }
         })
     }

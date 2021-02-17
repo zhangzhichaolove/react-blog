@@ -1,5 +1,34 @@
 import axios from "axios";
+import { message as Message } from 'antd';
+import TokenUtil from "./TokenUtil";
 
 
 axios.defaults.baseURL = "http://localhost"
-axios.defaults.headers = { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY3JlYXRlZEF0IjoiMDAwMS0wMS0wMVQwMDowMDowMFoiLCJ1cGRhdGVkQXQiOiIwMDAxLTAxLTAxVDAwOjAwOjAwWiIsImFjY291bnQiOiIxMzU5NDM0NzgxNyIsInRva2VuIjoiIiwiZXhwIjoxNjEzNTQwMTMwLCJpc3MiOiJibG9nX2FwaSIsIm5iZiI6MTYxMzUzODUzMH0.1DdM7h6yCC6T1ckHHnof14tiQ3zggKlIJRl2nx6YGe4' }
+axios.defaults.headers = { token: TokenUtil.getToken() }
+axios.interceptors.request.use(config => {
+    const token = TokenUtil.getToken()
+    if (token) {
+        config.headers.token = token
+    }
+    return config
+}, err => {
+    return Promise.reject(err)
+})
+
+axios.interceptors.response.use(
+    response => {
+        if (response.data.code && response.data.code !== 200) {
+            switch (response.data.code) {
+                case 401:
+                    Message.error("登录失效,请重新登录!")
+                    break
+                default:
+                    Message.error(response.data.message)
+                    break
+            }
+        }
+        return response
+    },
+    error => {
+        return Promise.reject(error.response.status)
+    })

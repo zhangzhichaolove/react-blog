@@ -101,7 +101,6 @@ export default class index extends Component<Iprops, IState> {
                 if (code === 200) {
                     Message.success('添加成功!');
                 } else {
-                    Message.error(message);
                     tags = tags.filter(tag => tag !== inputValue)
                     this.setState({
                         tags,
