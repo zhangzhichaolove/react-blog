@@ -7,6 +7,7 @@ import Class from './page/Class'
 import NotFound from './page/NotFound'
 // import About from './page/About'
 import './App.less';
+import './util/AxiosUtil'
 
 function App() {
   return (

@@ -1,0 +1,5 @@
+import axios from "axios";
+
+
+axios.defaults.baseURL = "http://localhost"
+axios.defaults.headers = { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY3JlYXRlZEF0IjoiMDAwMS0wMS0wMVQwMDowMDowMFoiLCJ1cGRhdGVkQXQiOiIwMDAxLTAxLTAxVDAwOjAwOjAwWiIsImFjY291bnQiOiIxMzU5NDM0NzgxNyIsInRva2VuIjoiIiwiZXhwIjoxNjEzNTMzMjY0LCJpc3MiOiJibG9nX2FwaSIsIm5iZiI6MTYxMzUzMTY2NH0.WYdZh8Xda4TyMDki9ZYRquUcHPxxvsFqKcUl_zj7h_A' }

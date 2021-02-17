@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Modal, Tag, Input } from 'antd';
+import { Modal, Tag, Input, message as Message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import './index.css'
+import axios from 'axios';
 
 interface IState {
     isModalVisible: boolean
-    tags: Array<string>
-    selectTags: Array<string>
+    tags: Array<any>
+    selectTags: Array<any>
     inputVisible: boolean
     inputValue: string
 }
@@ -25,7 +26,7 @@ export default class index extends Component<Iprops, IState> {
         super(props)
         this.state = {
             isModalVisible: this.props.isModalVisible,
-            tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+            tags: [],
             selectTags: [],
             inputVisible: false,
             inputValue: '',
@@ -38,18 +39,30 @@ export default class index extends Component<Iprops, IState> {
         }
     }
 
-    handleTagClick = (e: any) => {
-        const tagName = e.target.outerText
-        const isSelect = this.state.selectTags.filter(tag => tag === tagName).length > 0
-        !isSelect && this.state.selectTags.push(tagName)
-        const selectTags = isSelect ? this.state.selectTags.filter(tag => tag !== tagName) : this.state.selectTags
+    componentDidMount() {
+        axios('/api/findAllTag').then((res) => {
+            const labels = res.data.result
+            // const tags: string[] = []
+            // labels.forEach((el: any, index: number, array: Array<any>) => {
+            //     tags.push(el.name)
+            // })
+            this.setState({ tags: labels })
+        })
+    }
+
+    handleTagClick = (item: any) => {
+        const isSelect = this.state.selectTags.filter(tag => tag.name === item.name).length > 0
+        !isSelect && this.state.selectTags.push(item)
+        const selectTags = isSelect ? this.state.selectTags.filter(tag => tag.name !== item.name) : this.state.selectTags
         this.setState({ selectTags })
     }
 
-    mapTag = (item: string) => {
-        const color = this.state.selectTags.filter(tag => tag === item).length > 0 ? 'magenta' : 'cyan'
+    mapTag = (item: any, index: number) => {
+        const color = this.state.selectTags.filter(tag => tag.name === item.name).length > 0 ? 'magenta' : 'cyan'
         return (
-            <Tag color={color} onClick={this.handleTagClick} className='tagStyle'><a>{item}</a></Tag>
+            <Tag color={color} onClick={() => {
+                this.handleTagClick(item)
+            }} className='tagStyle'><a>{item.name}</a></Tag>
         )
     }
 
@@ -80,8 +93,22 @@ export default class index extends Component<Iprops, IState> {
         let { tags } = this.state;
         if (inputValue && tags.indexOf(inputValue) === -1) {
             tags = [...tags, inputValue];
+            let param = {
+                name: inputValue
+            }
+            axios.post('/api/addTag', param).then((res) => {
+                const { code, message } = res.data
+                if (code === 200) {
+                    Message.success('添加成功!');
+                } else {
+                    Message.error(message);
+                    tags = tags.filter(tag => tag !== inputValue)
+                    this.setState({
+                        tags,
+                    });
+                }
+            })
         }
-        console.log(tags);
         this.setState({
             tags,
             inputVisible: false,

@@ -10,7 +10,7 @@ import LabelModal from '../../components/LabelModal'
 import './index.css'
 
 interface IState {
-    tags: Array<string>
+    tags: Array<any>
     isLabelModalVisible: boolean
 }
 
@@ -23,7 +23,7 @@ export default class index extends Component<Iprops, IState> {
     constructor(props: any) {
         super(props)
         this.state = {
-            tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+            tags: [],
             isLabelModalVisible: false
         }
     }
@@ -55,9 +55,9 @@ export default class index extends Component<Iprops, IState> {
         });
     }
 
-    mapTag(item: string) {
+    mapTag(item: any) {
         return (
-            <Tag color="magenta" >{item}</Tag>
+            <Tag color="magenta" >{item.name}</Tag>
         )
     }
 
