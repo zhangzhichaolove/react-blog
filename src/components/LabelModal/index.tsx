@@ -40,12 +40,12 @@ export default class index extends Component<Iprops, IState> {
     }
 
     componentDidMount() {
+        this.getAllTag()
+    }
+
+    getAllTag = () => {
         axios('/api/findAllTag').then((res) => {
             const labels = res.data.result
-            // const tags: string[] = []
-            // labels.forEach((el: any, index: number, array: Array<any>) => {
-            //     tags.push(el.name)
-            // })
             this.setState({ tags: labels })
         })
     }
@@ -60,9 +60,9 @@ export default class index extends Component<Iprops, IState> {
     mapTag = (item: any, index: number) => {
         const color = this.state.selectTags.filter(tag => tag.name === item.name).length > 0 ? 'magenta' : 'cyan'
         return (
-            <Tag color={color} onClick={() => {
+            <Tag color={color} key={item.id} onClick={() => {
                 this.handleTagClick(item)
-            }} className='tagStyle'><a>{item.name}</a></Tag>
+            }} className='tagStyle'>{item.name}</Tag>
         )
     }
 
@@ -91,25 +91,19 @@ export default class index extends Component<Iprops, IState> {
     handleInputConfirm = () => {
         const { inputValue } = this.state;
         let { tags } = this.state;
-        if (inputValue && tags.indexOf(inputValue) === -1) {
-            tags = [...tags, inputValue];
+        if (inputValue && tags.filter(tag => tag.name === inputValue).length === 0) {
             let param = {
                 name: inputValue
             }
             axios.post('/api/addTag', param).then((res) => {
-                const { code, message } = res.data
+                const { code } = res.data
                 if (code === 200) {
                     Message.success('添加成功!');
-                } else {
-                    tags = tags.filter(tag => tag !== inputValue)
-                    this.setState({
-                        tags,
-                    });
+                    this.getAllTag()
                 }
             })
         }
         this.setState({
-            tags,
             inputVisible: false,
             inputValue: '',
         });
