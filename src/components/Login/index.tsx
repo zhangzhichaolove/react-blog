@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from 'antd'
 import axios from 'axios';
-import TokenUtil from '../../util/TokenUtil';
 
 export default function Login(props: any) {
 
@@ -12,7 +11,7 @@ export default function Login(props: any) {
         }
         axios.post('/api/login', param).then((res) => {
             const { token } = res.data.result
-            TokenUtil.token = token
+            localStorage.setItem('token', token)
             props.props && props.props.history.push("/edit");
         })
     }

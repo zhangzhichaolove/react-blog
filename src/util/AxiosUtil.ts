@@ -1,12 +1,10 @@
 import axios from "axios";
 import { message as Message } from 'antd';
-import TokenUtil from "./TokenUtil";
-
 
 axios.defaults.baseURL = "http://localhost"//window.location.host
-axios.defaults.headers = { token: TokenUtil.getToken() }
+// axios.defaults.headers = { token: TokenUtil.getToken() }
 axios.interceptors.request.use(config => {
-    const token = TokenUtil.getToken()
+    const token = localStorage.getItem('token')
     if (token) {
         config.headers.token = token
     }

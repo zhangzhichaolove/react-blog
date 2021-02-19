@@ -6,7 +6,7 @@ import axios from 'axios'
 import './index.css'
 
 export default function Label() {
-    const [tags, setTags] = useState(new Array())
+    const [tags, setTags] = useState(new Array<any>())
     useEffect(() => {
         axios('/api/findAllTag').then((res) => {
             const labels = res.data.result
