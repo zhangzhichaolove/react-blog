@@ -2,7 +2,7 @@
   "name": "react-blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/web",
+  "homepage": "",
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
     "@craco/craco": "^6.1.1",
