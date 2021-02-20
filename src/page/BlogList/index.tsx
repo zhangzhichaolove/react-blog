@@ -60,7 +60,9 @@ export default class index extends Component<Iprops, IState> {
                         <List.Item>
                             {isLoading ? <Skeleton loading={isLoading} active /> :
                                 <div className='blogTitleStyle'>
-                                    <LinkNav to={{ pathname: '/blog', state: { id: item.id } }}>
+                                    <LinkNav onClick={() => {
+                                        localStorage.setItem('blogId', item.id)
+                                    }} to={{ pathname: '/blog', state: { id: item.id } }}>
                                         <Card title={item.title}>
                                             <Statistics />
                                             <div>{item.content}</div>

@@ -35,7 +35,7 @@ export default class index extends Component<Iprops, IState> {
     }
 
     componentDidMount() {
-        const id = this.props.location.state.id
+        const id = this.props.location.state ? this.props.location.state.id : localStorage.getItem('blogId')
         axios('/api/blogDetails?id=' + id).then((res) => {
             const content = res.data.result
             this.setState({ data: content, loading: false })
