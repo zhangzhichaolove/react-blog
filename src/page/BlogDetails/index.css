@@ -49,7 +49,7 @@
 }
 
 .blogStyle img {
-    width: 100%;
+    max-width: 100%;
     border-radius: 5px;
     border: 1px solid #f0f0f0;
 }
