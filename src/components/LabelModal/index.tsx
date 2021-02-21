@@ -13,7 +13,6 @@ interface IState {
 }
 
 interface Iprops {
-    isModalVisible: boolean
     handleOk?: Function
     handleCancel?: Function
 }
@@ -25,7 +24,7 @@ export default class index extends Component<Iprops, IState> {
     constructor(props: any) {
         super(props)
         this.state = {
-            isModalVisible: this.props.isModalVisible,
+            isModalVisible: false,
             tags: [],
             selectTags: [],
             inputVisible: false,
@@ -33,11 +32,38 @@ export default class index extends Component<Iprops, IState> {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: any, nextContext: any) {
-        if (nextProps.isModalVisible !== this.state.isModalVisible) {
-            this.setState({ isModalVisible: nextProps.isModalVisible })
-        }
+    show = () => {
+        this.setState({ isModalVisible: true })
     }
+
+    /**
+     * prpos更新时会回调此方法，可通过返回值决定是否更新
+     */
+    // static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    //     if (nextProps.isModalVisible !== prevState.isModalVisible) {
+    //         return { isModalVisible: prevState.isModalVisible }
+    //     }
+    //     return null
+    // }
+
+    /**
+     * getDerivedStateFromProps更新后，这里会收到返回值，可以通过条件决定是否更新
+     */
+    // componentDidUpdate(prevProps: any, prevState: any) {
+    //     console.log('componentDidUpdate-->', prevProps, prevState);
+    //     if (prevProps.isModalVisible !== prevState.isModalVisible) {
+    //         this.setState({ isModalVisible: prevProps.isModalVisible })
+    //     }
+    // }
+
+    /**
+     * componentWillReceiveProps过时，兼容实现
+     */
+    // UNSAFE_componentWillReceiveProps(nextProps: any, nextContext: any) {
+    //     if (nextProps.isModalVisible !== this.state.isModalVisible) {
+    //         this.setState({ isModalVisible: nextProps.isModalVisible })
+    //     }
+    // }
 
     componentDidMount() {
         this.getAllTag()

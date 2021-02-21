@@ -11,7 +11,6 @@ import './index.css'
 
 interface IState {
     tags: Array<any>
-    isLabelModalVisible: boolean
     title: string
 }
 
@@ -23,12 +22,12 @@ const { TextArea } = Input;
 export default class index extends Component<Iprops, IState> {
 
     content = ''
+    labelModal: any
 
     constructor(props: any) {
         super(props)
         this.state = {
             tags: [],
-            isLabelModalVisible: false,
             title: ''
         }
     }
@@ -56,13 +55,10 @@ export default class index extends Component<Iprops, IState> {
     }
 
     addLabel = () => {
-        this.setState({
-            isLabelModalVisible: true
-        });
+        this.labelModal.show()
     }
 
     titleOnChange = ({ target: { value } }: any) => {
-        console.log(value);
         this.setState({ title: value })
     }
 
@@ -118,8 +114,7 @@ export default class index extends Component<Iprops, IState> {
                     renderHTML={(text) => <div className='blogStyle' dangerouslySetInnerHTML={{ __html: marked(text || '') }}></div>}
                     onChange={this.handleEditorChange}
                 />
-                <LabelModal isModalVisible={this.state.isLabelModalVisible} handleOk={(selectTags: Array<string>) => {
-                    console.log('选择了标签-->', selectTags);
+                <LabelModal ref={ref => this.labelModal = ref} handleOk={(selectTags: Array<string>) => {
                     this.setState({
                         tags: selectTags
                     });
