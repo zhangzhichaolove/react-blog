@@ -4,6 +4,7 @@ import { Link as LinkNav } from 'react-router-dom'
 import axios from 'axios'
 import Statistics from '../../components/Statistics'
 import BackTop from '../../components/BackTop'
+import BlogLabel from '../../components/BlogLabel'
 import './index.css'
 
 interface IState {
@@ -17,7 +18,7 @@ interface Iprops {
 
 
 export default class index extends Component<Iprops, IState> {
-    pageNumber = 1
+    pageNumber = localStorage.getItem('blogPage') || 1
     pageSize = 8
 
     constructor(props: any) {
@@ -40,6 +41,7 @@ export default class index extends Component<Iprops, IState> {
     }
 
     onPageChange = (page: any, pageSize: any) => {
+        localStorage.setItem('blogPage', page)
         this.pageNumber = page
         this.pageSize = pageSize
         this.refreshData()
@@ -63,9 +65,10 @@ export default class index extends Component<Iprops, IState> {
                                     <LinkNav onClick={() => {
                                         localStorage.setItem('blogId', item.id)
                                     }} to={{ pathname: '/blog', state: { id: item.id } }}>
-                                        <Card title={item.title}>
+                                        <Card title={item.title} style={{ flexDirection: 'column' }}>
                                             <Statistics />
-                                            <div>{item.content}</div>
+                                            <BlogLabel tags={item.labels} />
+                                            <div>{item.brief}</div>
                                         </Card>
                                     </LinkNav>
                                 </div>}

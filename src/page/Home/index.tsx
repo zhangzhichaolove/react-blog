@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Affix } from 'antd'
 import { Switch, Route } from 'react-router-dom'
 import About from '../About'
 import BlogList from '../BlogList'
@@ -20,7 +20,9 @@ export default class index extends Component {
                 <Header />
                 <Row justify='center'>
                     <Col span={4}>
-                        <MenuNav />
+                        <Affix offsetTop={5}>
+                            <MenuNav />
+                        </Affix>
                     </Col>
                     <Col span={15}>
                         <Switch>

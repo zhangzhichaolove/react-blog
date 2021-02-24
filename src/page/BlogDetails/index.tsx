@@ -69,7 +69,9 @@ export default class index extends Component<Iprops, IState> {
                 <Spin tip="Loading..." spinning={this.state.loading}>
                     <Row justify='center'>
                         <Col span={4} >
-                            <MenuNav />
+                            <Affix offsetTop={50}>
+                                <MenuNav />
+                            </Affix>
                         </Col>
                         <Col span={15} style={{ overflow: 'hidden' }}>
                             <h2>{title}</h2>
