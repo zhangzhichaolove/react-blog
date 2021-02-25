@@ -1,0 +1,19 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accountStyle {
+    width: 50% !important;
+}
+
+.passwordStyle {
+    width: 50% !important;
+    margin-top: .5rem;
+}
+
+.buttonStyle {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
