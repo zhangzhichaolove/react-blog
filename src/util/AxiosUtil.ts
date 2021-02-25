@@ -2,7 +2,7 @@ import axios from "axios";
 import { message as Message } from 'antd';
 
 //"development","production"
-// axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost' : ''//window.location.host
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost' : ''//window.location.host
 // axios.defaults.headers = { token: TokenUtil.getToken() }
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
