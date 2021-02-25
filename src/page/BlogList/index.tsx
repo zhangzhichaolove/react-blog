@@ -66,7 +66,7 @@ export default class index extends Component<Iprops, IState> {
                                         localStorage.setItem('blogId', item.id)
                                     }} to={{ pathname: '/blog', state: { id: item.id } }}>
                                         <Card title={item.title} style={{ flexDirection: 'column' }}>
-                                            <Statistics />
+                                            <Statistics publishTime={item.updatedAt} readCount={item.readCount} />
                                             <BlogLabel tags={item.labels} />
                                             <div>{item.brief}</div>
                                         </Card>
