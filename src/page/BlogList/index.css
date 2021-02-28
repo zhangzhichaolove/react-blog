@@ -1,5 +1,25 @@
-.blogTitleStyle{
+.blogTitleStyle {
     font-size: 1.2rem;
     color: #1E90FF;
     padding: 0 .5rem;
+}
+
+.briefEllipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 15px;
+    color: #999;
+    width: fit-content;
+}
+
+.blogStatistics {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ant-card-body {
+    padding-top: .2rem !important;
+    padding-bottom: .5rem !important;
 }

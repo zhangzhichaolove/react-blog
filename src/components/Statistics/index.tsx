@@ -16,7 +16,7 @@ export default class index extends Component<Props> {
         return (
             <Row className={isCenter ? 'statisticsCenterStyle' : 'statisticsStyle'}>
                 <span><SendOutlined />{this.props.publishTime}</span>
-                <span><ProjectOutlined />go</span>
+                {/* <span><ProjectOutlined />go</span> */}
                 <span><FireOutlined />{this.props.readCount}</span>
             </Row>
         )
