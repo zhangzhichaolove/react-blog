@@ -22,6 +22,7 @@ export default function Login(props: any) {
         axios.post('/api/login', param).then((res) => {
             const { token } = res.data.result
             localStorage.setItem('token', token)
+            localStorage.setItem('editBlogId', '')
             props.props && props.props.history.push("/edit");
         })
     }

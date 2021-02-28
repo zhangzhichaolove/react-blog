@@ -3,6 +3,8 @@ import Footer from '../../components/Footer'
 import Label from '../../components/Label'
 import Contact from '../../components/Contact'
 import { Row, Col, Affix, Spin } from 'antd'
+import { EditOutlined } from '@ant-design/icons';
+import { Link as LinkNav } from 'react-router-dom'
 import Statistics from '../../components/Statistics'
 import BlogNav from '../../components/BlogNav'
 import Tocify from '../../components/Tocify'
@@ -64,6 +66,7 @@ export default class index extends Component<Iprops, IState> {
         })
         let { title, content } = this.state.data
         const html = marked(content || '')
+        const id = this.props.location.state ? this.props.location.state.id : localStorage.getItem('blogId')
         return (
             <>
                 <Spin tip="Loading..." spinning={this.state.loading}>
@@ -74,7 +77,14 @@ export default class index extends Component<Iprops, IState> {
                             </Affix>
                         </Col>
                         <Col span={15} style={{ overflow: 'hidden' }}>
-                            <h2>{title}</h2>
+                            <div className='titleContainer'><span>{title}</span>
+                                <LinkNav onClick={() => {
+                                    localStorage.setItem('editBlogId', id)
+                                }} to={{ pathname: '/edit', state: { editBlogId: id } }}>
+                                    <span className='blogEdit'><EditOutlined />编辑</span>
+                                </LinkNav>
+
+                            </div>
                             <Statistics isCenter={true} />
                             <div className='blogStyle'
                                 dangerouslySetInnerHTML={{ __html: html }}>

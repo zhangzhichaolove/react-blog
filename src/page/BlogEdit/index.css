@@ -5,6 +5,14 @@
 
 }
 
+.tagContainer {
+    padding-bottom: 10px;
+}
+
+.briefStyle {
+    margin-top: 10px !important;
+}
+
 .custom-html-style * {
     margin: .3rem 0rem !important;
 }

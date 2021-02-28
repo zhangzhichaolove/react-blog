@@ -12,33 +12,51 @@ import './index.css'
 interface IState {
     tags: Array<any>
     title: string
+    brief: string
+    content: string
+    blogData: any
 }
 
 interface Iprops {
+    history: any
+    location: any
 }
 
 const { TextArea } = Input;
 
 export default class index extends Component<Iprops, IState> {
 
-    content = ''
     labelModal: any
 
     constructor(props: any) {
         super(props)
         this.state = {
             tags: [],
-            title: ''
+            title: '',
+            brief: '',
+            content: '',
+            blogData: {}
         }
     }
 
     componentDidMount() {
-        console.log('支持高亮语言-->', hljs.listLanguages());
+        const id = this.props.location.state ? this.props.location.state.editBlogId : localStorage.getItem('editBlogId')
+        if (!id) {
+            return
+        }
+        axios('/api/blogDetails?id=' + id).then((res) => {
+            const blogData = res.data.result
+            this.setState({ blogData: blogData, title: blogData.title, brief: blogData.brief, content: blogData.content, tags: blogData.labels })
+        })
+        // console.log('支持高亮语言-->', hljs.listLanguages());
     }
 
     handleEditorChange = (data: { text: string, html: string }) => {
-        console.log('文本更新-->\n', data.text)
-        this.content = data.text
+        this.setState({ content: data.text })
+    }
+
+    handleBriefChange = ({ target: { value } }: any) => {
+        this.setState({ brief: value })
     }
 
     onImageUpload(file: any) {
@@ -55,7 +73,7 @@ export default class index extends Component<Iprops, IState> {
     }
 
     addLabel = () => {
-        this.labelModal.show()
+        this.labelModal.show(this.state.tags)
     }
 
     titleOnChange = ({ target: { value } }: any) => {
@@ -66,18 +84,31 @@ export default class index extends Component<Iprops, IState> {
         const { tags, title } = this.state
         const tagIds: Array<any> = []
         tags.forEach(tag => tagIds.push(tag.id))
-        let param = {
+        let param: any = {
             title: title,
-            brief: "这是简介。",
-            content: this.content,
+            brief: this.state.brief,
+            content: this.state.content,
             tagIds: tagIds.join(',')
         }
-        axios.post('/api/addBlog', param).then((res) => {
-            const { code } = res.data
-            if (code === 200) {
-                Message.success('发布成功!');
-            }
-        })
+        const id = this.props.location.state ? this.props.location.state.editBlogId : localStorage.getItem('editBlogId')
+        if (id) {
+            param.id = Number(id)
+            axios.post('/api/updateBlog', param).then((res) => {
+                const { code } = res.data
+                if (code === 200) {
+                    Message.success('编辑成功!');
+                    this.props.history.push("/");
+                }
+            })
+        } else {
+            axios.post('/api/addBlog', param).then((res) => {
+                const { code } = res.data
+                if (code === 200) {
+                    Message.success('发布成功!');
+                    this.props.history.push("/");
+                }
+            })
+        }
     }
 
     mapTag(item: any) {
@@ -104,14 +135,24 @@ export default class index extends Component<Iprops, IState> {
         return (
             <div>
                 <h2>文章编辑</h2>
+                <div className='tagContainer'>
+                    {tagChild}
+                    <Button type='primary' size='small' onClick={this.addLabel}>添加标签</Button>
+                </div>
                 <Input allowClear placeholder='请输入文章标题' value={this.state.title} onChange={this.titleOnChange} />
-                {tagChild}
-                <Button type='primary' onClick={this.addLabel}>添加标签</Button>
+                <TextArea
+                    className='briefStyle'
+                    value={this.state.brief}
+                    onChange={this.handleBriefChange}
+                    defaultValue="请输入文章简介"
+                    autoSize={{ minRows: 3, maxRows: 50 }}
+                />
                 <MdEditor
                     style={{ height: "600px", marginTop: '20px' }}
                     config={{ imageAccept: '.jpg,.jpeg,.gif,.png' }}
                     onImageUpload={this.onImageUpload}
                     renderHTML={(text) => <div className='blogStyle' dangerouslySetInnerHTML={{ __html: marked(text || '') }}></div>}
+                    value={this.state.content}
                     onChange={this.handleEditorChange}
                 />
                 <LabelModal ref={ref => this.labelModal = ref} handleOk={(selectTags: Array<string>) => {
@@ -119,12 +160,6 @@ export default class index extends Component<Iprops, IState> {
                         tags: selectTags
                     });
                 }} />
-                <TextArea
-                    // value={value}
-                    // onChange={this.onChange}
-                    placeholder="请输入文章简介"
-                    autoSize={{ minRows: 3, maxRows: 50 }}
-                />
                 <Button type='primary' onClick={this.submitBlog}>发布文章</Button>
             </div>
         )

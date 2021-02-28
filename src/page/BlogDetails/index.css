@@ -2,7 +2,19 @@
     padding: .6rem;
     border-bottom: 1px solid #DDD;
     background-color: #FFF;
+}
 
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: black;
+}
+
+.blogEdit{
+    font-size: 20px;
+    color: red;
 }
 
 .detailed-title {
