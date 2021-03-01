@@ -17,7 +17,10 @@ export default function Label() {
         <div>
             <Divider>标签云</Divider>
             <div className='tagContainer'>
-                {tags.map(item => <LinkNav key={item.id} to={{ pathname: '/blogs', state: { tag: item.name } }}><Tag color="magenta" className='tagStyle'>{item.name}</Tag></LinkNav>)}
+                {tags.map(item => <LinkNav key={item.id} onClick={() => {
+                    localStorage.setItem('labelId', item.id)
+                    localStorage.setItem('labelName', item.name)
+                }} to={{ pathname: '/blogs', state: { labelName: item.name, labelId: item.id } }}><Tag color="magenta" className='tagStyle'>{item.name}</Tag></LinkNav>)}
             </div>
         </div>
     )

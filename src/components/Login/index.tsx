@@ -23,6 +23,7 @@ export default function Login(props: any) {
             const { token } = res.data.result
             localStorage.setItem('token', token)
             localStorage.setItem('editBlogId', '')
+            localStorage.setItem('userInfo', JSON.stringify(res.data.result))
             props.props && props.props.history.push("/edit");
         })
     }

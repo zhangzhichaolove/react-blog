@@ -16,6 +16,7 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import './index.css'
 import axios from 'axios'
+import { getUser } from '../../util/UserInfoUtil'
 
 interface IState {
     data: any
@@ -64,7 +65,7 @@ export default class index extends Component<Iprops, IState> {
                 return hljs.highlightAuto(code, hljs.listLanguages()).value
             }
         })
-        let { title, content } = this.state.data
+        let { userId, title, content } = this.state.data
         const html = marked(content || '')
         const id = this.props.location.state ? this.props.location.state.id : localStorage.getItem('blogId')
         return (
@@ -78,12 +79,11 @@ export default class index extends Component<Iprops, IState> {
                         </Col>
                         <Col span={15} style={{ overflow: 'hidden' }}>
                             <div className='titleContainer'><span>{title}</span>
-                                <LinkNav onClick={() => {
+                                {getUser().id === userId && <LinkNav onClick={() => {
                                     localStorage.setItem('editBlogId', id)
                                 }} to={{ pathname: '/edit', state: { editBlogId: id } }}>
                                     <span className='blogEdit'><EditOutlined />编辑</span>
-                                </LinkNav>
-
+                                </LinkNav>}
                             </div>
                             <Statistics isCenter={true} />
                             <div className='blogStyle'
