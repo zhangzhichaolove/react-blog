@@ -14,7 +14,41 @@
 
 ## 后端服务
 
-> 注意：本博客采用前后端分离方式开发，故此博客运行需要启动后端服务进行辅助，后端服务请在Releases下载,然后执行下面命令启动即可。
+> 注意：本博客采用前后端分离方式开发，故此博客运行需要启动后端服务进行辅助，后端服务请在Releases下载。
+> 启动服务前，你需要配置一些参数，请在server同级目录创建文件`config/application.yml`,并将如下内容添加。
+
+```
+running:
+  mode: debug
+
+server:
+  port: 80
+  https: false
+
+error:
+  # zh/en
+  language: zh
+
+datasource:
+  driverName: sqlite3
+  host: localhost
+  port: 3306
+  database: test
+  username: root
+  password:
+  charset: utf8
+  maxOpenConns: 0
+  maxIdleConns: 20
+  local: Asia/ShangHai
+
+qiniu:
+  accessKey: XXXX
+  secretKey: XXXXXXX
+  bucket: peakchao
+  url: http://res.chaochao.cool/
+```
+
+> 启动服务
 
 ```
 # windows
