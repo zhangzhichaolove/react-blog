@@ -1,5 +1,10 @@
 # 项目演示地址：[https://blog.chaochao.cool](https://blog.chaochao.cool)
 
+# 由于考虑到国内网络问题，在此提供镜像地址
+
+[gitee](https://gitee.com/peakchao/react-blog.git)
+[github](https://github.com/zhangzhichaolove/react-blog.git)
+
 # 项目截图
 
 ![首页](screenshot/main.png)
