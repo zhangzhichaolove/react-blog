@@ -10,6 +10,10 @@
 ![首页](screenshot/main.png)
 ![博客详情](screenshot/blog.png)
 ![博客编辑](screenshot/edit.png)
+
+# 极速体验
+
+> 点击[releases](releases)，下载对应平台文件解压后直接运行，然后浏览器访问[http://localhost](http://localhost)即可。
 # React-Blog 使用说明
 
 ## 后端服务
