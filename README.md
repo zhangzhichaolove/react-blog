@@ -14,6 +14,7 @@
 # 极速体验
 
 > github用户 点击[releases](https://github.com/zhangzhichaolove/react-blog/releases)，下载对应平台文件解压后直接运行，然后浏览器访问[http://localhost](http://localhost)即可。
+
 > gitee用户 点击[releases](https://gitee.com/peakchao/react-blog/releases)，下载对应平台文件解压后直接运行，然后浏览器访问[http://localhost](http://localhost)即可。
 # React-Blog 使用说明
 
