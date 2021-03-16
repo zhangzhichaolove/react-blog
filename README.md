@@ -48,6 +48,14 @@ qiniu:
   url: http://res.chaochao.cool/
 ```
 
+> 目录结构
+
+```
+blog_api
+├── config
+│   └── application.yml
+```
+
 > 启动服务
 
 ```
@@ -102,6 +110,14 @@ npm run build
 
 > 编译完成后将会得到build目录，将build目录重命名为blog并放到后端服务同级目录，后台启动后端服务即完成部署。
 
+> 目录结构
+
+```
+blog_api
+├── blog
+├── config
+│   └── application.yml
+```
 
 
 ## 欢迎大家加入开发，一起完善功能。
