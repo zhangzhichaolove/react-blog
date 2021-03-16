@@ -13,7 +13,8 @@
 
 # 极速体验
 
-> 点击[releases](./releases)，下载对应平台文件解压后直接运行，然后浏览器访问[http://localhost](http://localhost)即可。
+> github用户 点击[releases](https://github.com/zhangzhichaolove/react-blog/releases)，下载对应平台文件解压后直接运行，然后浏览器访问[http://localhost](http://localhost)即可。
+> gitee用户 点击[releases](https://gitee.com/peakchao/react-blog/releases)，下载对应平台文件解压后直接运行，然后浏览器访问[http://localhost](http://localhost)即可。
 # React-Blog 使用说明
 
 ## 后端服务
@@ -106,7 +107,7 @@ npm start
 
 ## 上线部署
 
-> 确认域名地址是否配置完毕，[配置地址](util/AxiosUtil.ts),然后执行如下命令进行编译。
+> 确认域名地址是否配置完毕，[配置地址](https://github.com/zhangzhichaolove/react-blog/blob/main/src/util/AxiosUtil.ts),然后执行如下命令进行编译。
 
 ```
 npm run build
