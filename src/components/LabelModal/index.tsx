@@ -33,7 +33,7 @@ export default class index extends Component<Iprops, IState> {
     }
 
     show = (selectTags: Array<any>) => {
-        this.setState({ isModalVisible: true, selectTags })
+        this.setState({ isModalVisible: true, selectTags: selectTags || [] })
     }
 
     /**
