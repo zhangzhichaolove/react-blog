@@ -82,6 +82,10 @@ export default class index extends Component<Iprops, IState> {
 
     submitBlog = () => {
         const { tags, title } = this.state
+        if (!tags) {
+            Message.error('请添加标签!');
+            return
+        }
         const tagIds: Array<any> = []
         tags.forEach(tag => tagIds.push(tag.id))
         let param: any = {
@@ -131,7 +135,7 @@ export default class index extends Component<Iprops, IState> {
             }
         })
         const { tags } = this.state;
-        const tagChild = tags.map(this.mapTag);
+        const tagChild = tags && tags.map(this.mapTag);
         return (
             <div>
                 <h2>文章编辑</h2>

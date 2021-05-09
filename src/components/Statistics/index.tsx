@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row } from 'antd'
-import { SendOutlined, ProjectOutlined, FireOutlined } from '@ant-design/icons';
+import { SendOutlined, FireOutlined } from '@ant-design/icons';
 import './index.css'
 
 interface Props {
